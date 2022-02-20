@@ -1,5 +1,5 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { FC , useState , useEffect } from "react";
+import { FC , useState } from "react";
 import { Link } from "react-router-dom";
 
 const MenuBar:FC = () => {
