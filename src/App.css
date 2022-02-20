@@ -1,0 +1,8 @@
+*{
+    font-family: 'Kanit';
+}
+
+.btn-box:hover{
+    text-decoration: underline;
+    /* text-decoration-style: wavy; */
+}
