@@ -12,6 +12,7 @@ import Video from "./pages/Video";
 import Contest from "./pages/Contest";
 import MenuBar from "./components/MenuBar";
 import authentication from "./services/authentication";
+import cookieService from "./services/cookieService";
 
 const App: FC = () => {
   
@@ -21,7 +22,8 @@ const App: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast()
 
-  if(!loginState && !localStorage.getItem('isLogin') && window.location.pathname!=="/"){
+  
+  if(!loginState && !cookieService("get" , "isLogin") && window.location.pathname!=="/"){
     document.location.href = "/";
   }
 
@@ -57,7 +59,7 @@ const App: FC = () => {
           isClosable: true,
         })
       }else{
-        localStorage.setItem('isLogin' , "true");
+        cookieService("set" , "isLogin" , "true" , 3);
         toast({
           title: 'แจ้งเตือน',
           description: "เข้าสู่ระบบสำเร็จ",
@@ -79,7 +81,7 @@ const App: FC = () => {
             </Heading>
           </Box>
           {
-            loginState || localStorage.getItem('isLogin') ? (
+            loginState || cookieService("get" , "isLogin") ? (
                 <MenuBar/>
             ) : (
               <div className="login-form">

@@ -3,16 +3,19 @@ import { CheckCircleIcon, WarningTwoIcon } from "@chakra-ui/icons";
 import { Tr , Td , Flex , Text , Tooltip , Badge } from '@chakra-ui/react';
 import courseData from "../interfaces/courseData.interface";
 import { Link } from 'react-router-dom';
-
+import cookieService from "../services/cookieService";
 
 const CourseList:FC<{props?:courseData}> = ({props}) => {
     
     const {title , category , courses , done} = props;
     
     const setCourseInfo = () => {
-        localStorage.setItem('courseSet_title' , title);
-        localStorage.setItem('courseSet_done' , String(done));
-        localStorage.setItem('courseSet_courses' , JSON.stringify(courses));
+        cookieService("set" , "courseSet_title" , title , 3);
+        cookieService("set" , "courseSet_done" , String(done) , 3);
+        cookieService("set" , "courseSet_courses" , JSON.stringify(courses) , 3);
+        // localStorage.setItem('courseSet_title' , title);
+        // localStorage.setItem('courseSet_done' , String(done));
+        // localStorage.setItem('courseSet_courses' , JSON.stringify(courses));
     }
     
     return (

@@ -15,11 +15,12 @@ import {
 } from "@chakra-ui/react";
 import useGetSheet from "../hooks/useGetSheet";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
+import cookieService from "../services/cookieService";
 
 const Video: FC = () => {
   const { data, loading } = useGetSheet(
     "1txtEWEGO4oCEF8tcJctyZriN95fNxHE4VTR-eXi1ks0",
-    '* WHERE A="' + localStorage.getItem("course_id") + '"'
+    '* WHERE A="' + cookieService("get" , "course_id") + '"'
   );
   const [videoLink, setVideo] = useState("");
   const [courseName, setCourseName] = useState("");

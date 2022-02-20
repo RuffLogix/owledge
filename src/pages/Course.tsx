@@ -4,14 +4,15 @@ import { CheckCircleIcon, WarningTwoIcon } from "@chakra-ui/icons";
 import ContentList from "../components/ContentList";
 import useGetSheet from "../hooks/useGetSheet";
 import contentData from "../interfaces/contentData.interface";
+import cookieService from "../services/cookieService";
 
 const Course:FC = () => {
 
     const {data , loading} = useGetSheet('1txtEWEGO4oCEF8tcJctyZriN95fNxHE4VTR-eXi1ks0' , '*');
 
-    let title = localStorage.getItem('courseSet_title');
-    let done = localStorage.getItem('courseSet_done');
-    let courses = JSON.parse(localStorage.getItem('courseSet_courses'));
+    let title = cookieService("get" , "courseSet_title");
+    let done = cookieService("get" , "courseSet_done");
+    let courses = JSON.parse(cookieService("get" , "courseSet_courses"));
 
     return (
         <div className="course-page">
