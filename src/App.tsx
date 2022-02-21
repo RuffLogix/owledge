@@ -67,7 +67,7 @@ const App: FC = () => {
       return;
     }
 
-    const resData = await axios.post('http://localhost:5000/login' , {"username" : userName , "password" : password});
+    const resData = await axios.post('https://owledge-backend.herokuapp.com/login' , {"username" : userName , "password" : password});
     const authenData = resData.data;
 
     if(authenData.length===0){

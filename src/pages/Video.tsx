@@ -33,7 +33,7 @@ const Video: FC = () => {
 
   useEffect(()=>{
         (async () => {
-            const a = await axios.post('http://localhost:5000/video' , {"courseId" : cookieService("get" , "course_id")});
+            const a = await axios.post('https://owledge-backend.herokuapp.com/video' , {"courseId" : cookieService("get" , "course_id")});
             console.log(a.data);
             setData(JSON.parse(a.data[0]['videos'].replace(/'\\'/g , '')));
             setCourseName(a.data[0]['title']);

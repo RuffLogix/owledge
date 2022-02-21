@@ -16,7 +16,7 @@ const Course:FC = () => {
 
     useEffect(()=>{
         (async () => {
-            const a = await axios.get('http://localhost:5000/course');
+            const a = await axios.get('https://owledge-backend.herokuapp.com/course');
             setData(a.data);
         })()
     } , []);

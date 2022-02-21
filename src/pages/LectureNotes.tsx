@@ -11,7 +11,7 @@ const LectureNotes:FC = () => {
     const [data , setData] = useState([]);
     useEffect(()=>{
         (async () => {
-            const a = await axios.get('http://localhost:5000/lectures');
+            const a = await axios.get('https://owledge-backend.herokuapp.com/lectures');
             setData(a.data);
         })()
     } , []);
