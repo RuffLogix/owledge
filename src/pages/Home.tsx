@@ -9,13 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import useGetSheet from "../hooks/useGetSheet";
 
 const Home: FC = () => {
-  const { data, loading } = useGetSheet(
-    "1txtEWEGO4oCEF8tcJctyZriN95fNxHE4VTR-eXi1ks0",
-    "*"
-  );
 
   return (
     <div className="home-page">

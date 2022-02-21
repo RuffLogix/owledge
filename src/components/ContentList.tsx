@@ -6,23 +6,20 @@ import cookieService from "../services/cookieService";
 
 const ContentList:FC<{props:contentData}> = ({props}) => {
 
-    const {title , author , course} = props;
-
-    const setCourse = () => {
-        cookieService("set" , "course_id" , course , 3);
-        // localStorage.setItem('course_id' , course);
-    }
+    const {title , author , course , authorLink} = props;
 
     return (
         <Tr>
             <Td>
-                <Text>
-                    <Link to="/video" onClick={setCourse}>{title}</Link>
+                <Text onClick={()=>{cookieService("set" , "course_id" , course , 3)}}>
+                    <Link to="/video">{title}</Link>
                 </Text>
             </Td>
             <Td></Td>
             <Td>
-                {author}
+                <Text>
+                    <a href={authorLink} target={"_blank"}>{author}</a>
+                </Text>
             </Td>
         </Tr>
     );

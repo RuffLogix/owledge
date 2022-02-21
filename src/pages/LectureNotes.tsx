@@ -1,12 +1,20 @@
 import { Table , Thead , Tbody , Th , Tr , TableCaption} from '@chakra-ui/react';
 import LectureList from '../components/LectureList';
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import lectureData from '../interfaces/lectureData.interface';
-import useGetSheet from "../hooks/useGetSheet";
+import axios from 'axios';
+// import useGetSheet from "../hooks/useGetSheet";
 
 const LectureNotes:FC = () => {
 
-    const {data , loading} = useGetSheet('1DAfXTEDKIr7IIgyMe86_XP5BZYBD0DHsbhuZj2JftaI' , '*');
+    // const {data , loading} = useGetSheet('1DAfXTEDKIr7IIgyMe86_XP5BZYBD0DHsbhuZj2JftaI' , '*');
+    const [data , setData] = useState([]);
+    useEffect(()=>{
+        (async () => {
+            const a = await axios.get('http://localhost:5000/lectures');
+            setData(a.data);
+        })()
+    } , []);
 
     return (
         <div className="lecture-note-page">
@@ -24,13 +32,12 @@ const LectureNotes:FC = () => {
                     {
                         data.map(element => {
                             let example_data:lectureData = {
-                                author : element['c'][3]['v'],
-                                title : element['c'][1]['v'],
-                                category : JSON.parse(element['c'][2]['v']),
-                                download_link : element['c'][5]['v'],
-                                contact : element['c'][4]['v']
+                                author : element['author'],
+                                title : element['title'],
+                                category : JSON.parse((element['tags']).replace(/'\\'/g , '')),
+                                download_link : element['lectureLink'],
+                                contact : element['authorLink']
                             }
-
                             return (
                                 <LectureList props={example_data}/>
                             );

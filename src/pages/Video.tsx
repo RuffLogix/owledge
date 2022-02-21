@@ -16,25 +16,30 @@ import {
 import useGetSheet from "../hooks/useGetSheet";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import cookieService from "../services/cookieService";
+import axios from "axios";
 
 
 const Video: FC = () => {
-  const { data, loading } = useGetSheet(
-    "1txtEWEGO4oCEF8tcJctyZriN95fNxHE4VTR-eXi1ks0",
-    '* WHERE A="' + cookieService("get" , "course_id") + '"'
-  );
+  // const { data, loading } = useGetSheet(
+  //   "1txtEWEGO4oCEF8tcJctyZriN95fNxHE4VTR-eXi1ks0",
+  //   '* WHERE A="' + cookieService("get" , "course_id") + '"'
+  // );
+
+  const [data , setData] = useState([]);
   const [videoLink, setVideo] = useState("");
   const [courseName, setCourseName] = useState("");
   const [courseAuthor, setCourseAuthor] = useState("");
   const [courseClips, setCourseClips] = useState([]);
 
-  useEffect(() => {
-    if (data.length !== 0) {
-      setCourseName(data[0]["c"][1]["v"]);
-      setCourseAuthor(data[0]["c"][2]["v"]);
-      setCourseClips(JSON.parse(data[0]["c"][3]["v"]));
-    }
-  }, [data]);
+  useEffect(()=>{
+        (async () => {
+            const a = await axios.post('http://localhost:5000/video' , {"courseId" : cookieService("get" , "course_id")});
+            console.log(a.data);
+            setData(JSON.parse(a.data[0]['videos'].replace(/'\\'/g , '')));
+            setCourseName(a.data[0]['title']);
+            setCourseAuthor(a.data[0]['author']);
+        })()
+    } , []);
 
   const updateVideo = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -59,7 +64,7 @@ const Video: FC = () => {
           <Table>
             <Tbody>
               {courseClips !== [] ? (
-                courseClips.map((clip) => {
+                data.map((clip) => {
                   return (
                     <Tr>
                       <Td>

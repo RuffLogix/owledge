@@ -1,18 +1,25 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Tooltip , Table , Thead , Tbody , Th , Tr , TableCaption , Td , Heading , Flex } from '@chakra-ui/react';
 import { CheckCircleIcon, WarningTwoIcon } from "@chakra-ui/icons";
 import ContentList from "../components/ContentList";
-import useGetSheet from "../hooks/useGetSheet";
 import contentData from "../interfaces/contentData.interface";
 import cookieService from "../services/cookieService";
+import axios from "axios";
 
 const Course:FC = () => {
-
-    const {data , loading} = useGetSheet('1txtEWEGO4oCEF8tcJctyZriN95fNxHE4VTR-eXi1ks0' , '*');
+    
+    const [data , setData] = useState([]);
 
     let title = cookieService("get" , "courseSet_title");
     let done = cookieService("get" , "courseSet_done");
     let courses = JSON.parse(cookieService("get" , "courseSet_courses"));
+
+    useEffect(()=>{
+        (async () => {
+            const a = await axios.get('http://localhost:5000/course');
+            setData(a.data);
+        })()
+    } , []);
 
     return (
         <div className="course-page">
@@ -40,17 +47,20 @@ const Course:FC = () => {
                         data.map(element => {
                             let found = false;
                             for(let i=0 ; i<courses.length && !found ; i++){
-                                if(element['c'][0]['v'] == courses[i]){
+                                if(element['id'] == courses[i]){
                                     found = true;
                                 }
                             }
                             
                             if(found){
                                 const CourseData:contentData = {
-                                    title : element['c'][1]['v'] ,
-                                    author : element['c'][2]['v'] , 
-                                    course : element['c'][0]['v']
+                                    title : element['title'] ,
+                                    author : element['author'] ,
+                                    course : element['id'] ,
+                                    authorLink : element['authorLink'] 
                                 }
+
+                                console.log(CourseData);
 
                                 return (
                                 <ContentList props={CourseData}/>

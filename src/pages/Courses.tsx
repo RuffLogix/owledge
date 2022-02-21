@@ -1,12 +1,21 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Table , Thead , Tbody , Th , Tr , TableCaption } from '@chakra-ui/react';
 import CourseList from '../components/CourseList';
-import useGetSheet from "../hooks/useGetSheet";
+import axios from "axios";
 import courseData from "../interfaces/courseData.interface";
+// import useGetSheet from "../hooks/useGetSheet";
 
 const Courses:FC = () => {
 
-    const {data , loading} = useGetSheet('1m_X3GL0ctuqxpkVkmjsgunlAWgrB6mVuds8WvbA1wUA' , '*');
+    // const {data , loading} = useGetSheet('1m_X3GL0ctuqxpkVkmjsgunlAWgrB6mVuds8WvbA1wUA' , '*');
+    const [data , setData] = useState([]);
+
+    useEffect(()=>{
+        (async () => {
+            const a = await axios.get('http://localhost:5000/courses');
+            setData(a.data);
+        })()
+    } , []);
 
     return (
         <div className="courses-page">
@@ -23,18 +32,18 @@ const Courses:FC = () => {
                     {
                         data.map(element => {
                             let courseDetails:courseData = {
-                                title : element['c'][1]['v'] ,
-                                done : element['c'][2]['v'] ,
-                                category : JSON.parse(element['c'][3]['v']) ,
-                                courses : JSON.parse(element['c'][4]['v'])
+                                title : element['title'] ,
+                                done : element['status'] ,
+                                category : JSON.parse(element['tags'].replace(/'\\'/g , '')) ,
+                                courses : element['courses']
                             } 
-                            // console.log(courseDetails);
+                            
+                            // console.log(element);
                             return (
                                 <CourseList props={courseDetails}/>
                             );
                         })
                     }
-                    {/* <CourseList/> */}
                 </Tbody>
             </Table>
         </div>
