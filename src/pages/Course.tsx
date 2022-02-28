@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Tooltip , Table , Thead , Tbody , Th , Tr , TableCaption , Td , Heading , Flex } from '@chakra-ui/react';
+import { Tooltip , Table , Thead , Tbody , Th , Tr , TableCaption , Heading , Flex } from '@chakra-ui/react';
 import { CheckCircleIcon, WarningTwoIcon } from "@chakra-ui/icons";
 import ContentList from "../components/ContentList";
 import contentData from "../interfaces/contentData.interface";
@@ -24,9 +24,9 @@ const Course:FC = () => {
     return (
         <div className="course-page">
             <Flex>
-                <Heading fontFamily={"Kanit"} fontSize={"24px"} mb={5}>{title}</Heading>
+                <Heading fontFamily={"Kanit"} fontSize={"24px"} mb={5} color={"rgb(235,235,235)"}>{title}</Heading>
                 {
-                    done=="false" ? (
+                    done==="false" ? (
                         <Tooltip label="เนื้อหายังไม่สมบูรณ์"><WarningTwoIcon color={"red.500"} w={"24px"} h={"24px"} ml={3}/></Tooltip>
                     ) : (
                         <Tooltip label="เนื้อหาสมบูรณ์"><CheckCircleIcon color={"green.500"} w={"24px"} h={"24px"} ml={3}/></Tooltip>
@@ -35,11 +35,11 @@ const Course:FC = () => {
             </Flex>
             <Table variant={"simple"}>
                 <TableCaption fontFamily={"Kanit"}>Table of Contents</TableCaption>
-                <Thead bg={"gray.100"}>
+                <Thead bg={"rgb(45, 45, 45)"}>
                     <Tr>
-                        <Th fontFamily={"Kanit"}>เนื้อหา</Th>
+                        <Th fontFamily={"Kanit"} color={"rgb(235,235,235)"}>เนื้อหา</Th>
                         <Th fontFamily={"Kanit"}></Th>
-                        <Th fontFamily={"Kanit"}>ผู้สอน</Th>
+                        <Th fontFamily={"Kanit"} color={"rgb(235,235,235)"}>ผู้สอน</Th>
                     </Tr>
                 </Thead>
                 <Tbody>

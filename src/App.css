@@ -2,7 +2,13 @@
     font-family: 'Kanit';
 }
 
+html{
+    background-color: rgb(32,32,35);
+    /* background-color: rgb(65, 65, 65); */
+}
+
 .btn-box:hover{
     text-decoration: underline;
+    text-decoration-color: rgb(235,235,235);
     /* text-decoration-style: wavy; */
 }

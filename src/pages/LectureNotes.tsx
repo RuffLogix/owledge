@@ -3,11 +3,9 @@ import LectureList from '../components/LectureList';
 import { FC, useEffect, useState } from "react";
 import lectureData from '../interfaces/lectureData.interface';
 import axios from 'axios';
-// import useGetSheet from "../hooks/useGetSheet";
 
 const LectureNotes:FC = () => {
 
-    // const {data , loading} = useGetSheet('1DAfXTEDKIr7IIgyMe86_XP5BZYBD0DHsbhuZj2JftaI' , '*');
     const [data , setData] = useState([]);
     useEffect(()=>{
         (async () => {
@@ -20,12 +18,12 @@ const LectureNotes:FC = () => {
         <div className="lecture-note-page">
             <Table variant={"simple"}>
                 <TableCaption fontFamily={"Kanit"}>Lecture Notes Table</TableCaption>
-                <Thead bg={"gray.100"}>
+                <Thead bg={"rgb(45, 45, 45)"}>
                     <Tr>
-                        <Th fontFamily={"Kanit"}>หัวข้อ</Th>
+                        <Th fontFamily={"Kanit"} color={"rgb(235,235,235)"}>หัวข้อ</Th>
                         <Th fontFamily={"Kanit"}></Th>
-                        <Th fontFamily={"Kanit"}>ประเภท</Th>
-                        <Th fontFamily={"Kanit"}>ผู้เขียน</Th>
+                        <Th fontFamily={"Kanit"} color={"rgb(235,235,235)"}>ประเภท</Th>
+                        <Th fontFamily={"Kanit"} color={"rgb(235,235,235)"}>ผู้เขียน</Th>
                     </Tr>
                 </Thead>
                 <Tbody>

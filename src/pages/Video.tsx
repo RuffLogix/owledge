@@ -13,23 +13,18 @@ import {
   Flex,
   Tooltip,
 } from "@chakra-ui/react";
-import useGetSheet from "../hooks/useGetSheet";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import cookieService from "../services/cookieService";
 import axios from "axios";
 
 
 const Video: FC = () => {
-  // const { data, loading } = useGetSheet(
-  //   "1txtEWEGO4oCEF8tcJctyZriN95fNxHE4VTR-eXi1ks0",
-  //   '* WHERE A="' + cookieService("get" , "course_id") + '"'
-  // );
 
   const [data , setData] = useState([]);
   const [videoLink, setVideo] = useState("");
   const [courseName, setCourseName] = useState("");
   const [courseAuthor, setCourseAuthor] = useState("");
-  const [courseClips, setCourseClips] = useState([]);
+  // const [courseClips, setCourseClips] = useState([]);
 
   useEffect(()=>{
         (async () => {
@@ -52,7 +47,7 @@ const Video: FC = () => {
   return (
     <div className="video-page">
       <Flex m={10}>
-        <Heading fontSize={"24px"} fontFamily={"Kanit"}>
+        <Heading fontSize={"24px"} fontFamily={"Kanit"} color={"rgb(235,235,235)"}>
           {courseName}
           <Tooltip label={"ผู้สอน : " + courseAuthor}>
             <InfoOutlineIcon color={"blue.500"} ml={3} />
@@ -63,11 +58,11 @@ const Video: FC = () => {
         <GridItem colSpan={1}>
           <Table>
             <Tbody>
-              {courseClips !== [] ? (
+              {data !== [] ? (
                 data.map((clip) => {
                   return (
                     <Tr>
-                      <Td>
+                      <Td color={"rgb(235,235,235)"}>
                         <button
                           onClick={updateVideo}
                           value={
@@ -89,7 +84,7 @@ const Video: FC = () => {
         <GridItem width={"100%"} colSpan={3}>
           <AspectRatio ratio={16 / 9}>
             {videoLink === "" ? (
-              <Text>กรุณาเลือกวิดีโอ</Text>
+              <Text color={"rgb(235,235,235)"}>กรุณาเลือกวิดีโอ</Text>
             ) : (
               <iframe title="display-video" src={videoLink} allowFullScreen />
             )}

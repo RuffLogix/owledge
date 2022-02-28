@@ -7,10 +7,10 @@ const LectureList:FC<{props:lectureData}> = ({props}) => {
     const { author , category , download_link , title , contact} = props;
 
     return (
-        <Tr>
+        <Tr bg={"gray.100"}>
             <Td>
                 <a href={download_link} target={"_blank"}>
-                    <Text color={"orange.400"}>
+                    <Text color={"blue.400"}>
                         {title}
                     </Text>
                 </a>
@@ -20,7 +20,7 @@ const LectureList:FC<{props:lectureData}> = ({props}) => {
                 {
                     category.map(element => {
                         return (
-                            <Badge colorScheme={"orange"} mr={1}>
+                            <Badge colorScheme={"blue"} mr={1}>
                                 {element}
                             </Badge>
                         )

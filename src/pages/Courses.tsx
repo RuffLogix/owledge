@@ -3,11 +3,9 @@ import { Table , Thead , Tbody , Th , Tr , TableCaption } from '@chakra-ui/react
 import CourseList from '../components/CourseList';
 import axios from "axios";
 import courseData from "../interfaces/courseData.interface";
-// import useGetSheet from "../hooks/useGetSheet";
 
 const Courses:FC = () => {
 
-    // const {data , loading} = useGetSheet('1m_X3GL0ctuqxpkVkmjsgunlAWgrB6mVuds8WvbA1wUA' , '*');
     const [data , setData] = useState([]);
 
     useEffect(()=>{
@@ -21,11 +19,11 @@ const Courses:FC = () => {
         <div className="courses-page">
             <Table variant={"simple"}>
                 <TableCaption fontFamily={"Kanit"}>Courses Table</TableCaption>
-                <Thead bg={"gray.100"}>
+                <Thead bg={"rgb(45, 45, 45)"}>
                     <Tr>
-                        <Th fontFamily={"Kanit"}>หัวข้อ</Th>
+                        <Th fontFamily={"Kanit"} color={"rgb(235,235,235)"}>หัวข้อ</Th>
                         <Th fontFamily={"Kanit"}></Th>
-                        <Th fontFamily={"Kanit"}>ประเภท</Th>
+                        <Th fontFamily={"Kanit"} color={"rgb(235,235,235)"}>ประเภท</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
@@ -38,7 +36,6 @@ const Courses:FC = () => {
                                 courses : element['courses']
                             } 
                             
-                            // console.log(element);
                             return (
                                 <CourseList props={courseDetails}/>
                             );

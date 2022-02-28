@@ -19,7 +19,7 @@ const CourseList:FC<{props?:courseData}> = ({props}) => {
     }
     
     return (
-        <Tr>
+        <Tr bg={"gray.100"}>
             <Td>
                 <Flex>
                     <Text fontSize={"14px"} mr={3}>
