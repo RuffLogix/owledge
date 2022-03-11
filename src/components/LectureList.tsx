@@ -7,10 +7,10 @@ const LectureList:FC<{props:lectureData}> = ({props}) => {
     const { author , category , download_link , title , contact} = props;
 
     return (
-        <Tr bg={"gray.100"}>
+        <Tr bg={"white"}>
             <Td>
                 <a href={download_link} target={"_blank"}>
-                    <Text color={"blue.400"}>
+                    <Text color={"blue.400"} fontSize={"16px"}>
                         {title}
                     </Text>
                 </a>
@@ -30,13 +30,13 @@ const LectureList:FC<{props:lectureData}> = ({props}) => {
             <Td>
                 {
                     contact!="-" ? (
-                        <Text>
+                        <Text fontSize={"16px"}>
                             <a href={contact} target="_blank">
                                 {author}
                             </a>
                         </Text>
                     ) : (
-                        <Text>
+                        <Text fontSize={"16px"}>
                             {author}    
                         </Text>
                     )

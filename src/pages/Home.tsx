@@ -13,12 +13,14 @@ import {
 } from "@chakra-ui/react";
 import { FC } from "react";
 import { Link } from "react-router-dom";
+import cookieService from "../services/cookieService";
 
 const Home: FC = () => {
 
   return (
     <div className="home-page">
-      
+      {cookieService("get", "isLogin","",0) ? (
+      <>
       <Grid templateColumns={"repeat(2,1fr)"} gap={6}>
         <GridItem width={"100%"} pt={10} pb={10}>
           <Heading fontFamily={"Kanit"} fontSize={"4xl"} color={"rgb(235,235,235)"}>
@@ -31,7 +33,7 @@ const Home: FC = () => {
       <Wrap>
         <WrapItem>
           <Box maxWidth={"310px"} mt={5} mb={5}>
-            <Heading fontSize={"24px"} color={"rgb(235,235,235)"}>Online Courses</Heading>
+            <Heading fontSize={"24px"} color={"rgb(235,235,235)"}>💻 Online Courses</Heading>
             <Text mt={4} fontSize={"18px"} color={"gray.400"}>
               คอร์สเรียนต่างๆ ในเว็บนี้
               ล้วนมาจากผู้ที่มีความชอบและมีความถนัดในสาขานั้นๆ โดยเนื้อหาต่างๆ
@@ -42,7 +44,7 @@ const Home: FC = () => {
         </WrapItem>
         <WrapItem>
         <Box maxWidth={"310px"} mt={5} mb={5}>
-            <Heading fontSize={"24px"} color={"rgb(235,235,235)"}>Lecture Notes</Heading>
+            <Heading fontSize={"24px"} color={"rgb(235,235,235)"}>📄 Lecture Notes</Heading>
             <Text mt={4} fontSize={"18px"} color={"gray.400"}>
               บางครั้งการอ่านสรุปอาจจะทำให้เข้าใจเนื้อหาที่เรียนมากขึ้น และ
               การแบ่งปันสรุปนั้นจะช่วยสร้างแรงบันดาลใจในการอ่านหนังสือให้ตัวเอง
@@ -51,7 +53,7 @@ const Home: FC = () => {
         </WrapItem>
         <WrapItem>
         <Box maxWidth={"310px"} mt={5} mb={5}>
-            <Heading fontSize={"24px"} color={"rgb(235,235,235)"}>Community</Heading>
+            <Heading fontSize={"24px"} color={"rgb(235,235,235)"}>🥚 Community</Heading>
             <Text mt={4} fontSize={"18px"} color={"gray.400"}>
               จุดประสงค์หลักของเว็บนี้คือ
               การสร้างสังคมแห่งการเรียนรู้ที่สมาชิกแต่ละคนสามารถเรียนรู้ในเรื่องที่ตนเองชอบและแบ่งปันความรู้ในเรื่องที่ตนถนัดได้
@@ -75,6 +77,12 @@ const Home: FC = () => {
           </Button>
         </Flex>
       </AspectRatio>
+      </>
+      ) : (
+        <AspectRatio ratio={16/9}>
+          <Heading color={"rgb(235,235,235)"} fontFamily={"Kanit"}>กรุณาเข้าสู่ระบบก่อนใช้งาน 🦉</Heading>
+        </AspectRatio>
+      )}
     </div>
   );
 };

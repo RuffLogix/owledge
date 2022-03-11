@@ -9,15 +9,15 @@ const ContentList:FC<{props:contentData}> = ({props}) => {
     const {title , author , course , authorLink} = props;
 
     return (
-        <Tr bg={"gray.100"}>
+        <Tr bg={"white"}>
             <Td>
-                <Text onClick={()=>{cookieService("set" , "course_id" , course , 3)}}>
+                <Text fontSize={"16px"} onClick={()=>{cookieService("set" , "course_id" , course , 3)}}>
                     <Link to="/video">{title}</Link>
                 </Text>
             </Td>
             <Td></Td>
             <Td>
-                <Text>
+                <Text fontSize={"16px"}>
                     <a href={authorLink} target={"_blank"}>{author}</a>
                 </Text>
             </Td>

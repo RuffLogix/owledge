@@ -1,19 +1,23 @@
 
-const cookieService = (ftype , name="" , value="" , daysToLive=0) => {
-    const setCookie = (name, value, daysToLive) => {
+const cookieService = (ftype:string , name:string , value:string , daysToLive:number):any => {
+    
+    const setCookie = (name:string , value:string , daysToLive:number) => {
         // Encode value in order to escape semicolons, commas, and whitespace
-        var cookie = name + "=" + encodeURIComponent(value);
-        
-        if(typeof daysToLive === "number") {
-            /* Sets the max-age attribute so that the cookie expires
-            after the specified number of days */
-            cookie += "; max-age=" + (daysToLive*24*60*60);
-            
-            document.cookie = cookie;
+        try{
+            let cookie:string = name + "=" + encodeURIComponent(value);
+            if(typeof daysToLive === "number") {
+                /* Sets the max-age attribute so that the cookie expires
+                after the specified number of days */
+                cookie += "; max-age=" + (daysToLive*24*60*60);
+                
+                document.cookie = cookie;
+            }
+        }catch{
+            console.log("SetCookie Method Error");
         }
     }
 
-    const getCookie = (name) => {
+    const getCookie = (name?:string):string => {
         // Split cookie string and get all individual name=value pairs in an array
         var cookieArr = document.cookie.split(";");
         
@@ -30,7 +34,7 @@ const cookieService = (ftype , name="" , value="" , daysToLive=0) => {
         }
         
         // Return null if not found
-        return null;
+        return "";
     }
 
     if(ftype==="set"){

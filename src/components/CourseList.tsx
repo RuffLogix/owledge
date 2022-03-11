@@ -5,7 +5,7 @@ import courseData from "../interfaces/courseData.interface";
 import { Link } from 'react-router-dom';
 import cookieService from "../services/cookieService";
 
-const CourseList:FC<{props?:courseData}> = ({props}) => {
+const CourseList:FC<{props:courseData}> = ({props}) => {
     
     const {title , category , courses , done} = props;
     
@@ -19,10 +19,10 @@ const CourseList:FC<{props?:courseData}> = ({props}) => {
     }
     
     return (
-        <Tr bg={"gray.100"}>
+        <Tr bg={"white"}>
             <Td>
                 <Flex>
-                    <Text fontSize={"14px"} mr={3}>
+                    <Text fontSize={"16px"} mr={3}>
                         <Link to="/course" onClick={setCourseInfo}>{title}</Link>
                     </Text>
                     { 

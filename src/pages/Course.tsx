@@ -10,9 +10,9 @@ const Course:FC = () => {
     
     const [data , setData] = useState([]);
 
-    let title = cookieService("get" , "courseSet_title");
-    let done = cookieService("get" , "courseSet_done");
-    let courses = JSON.parse(cookieService("get" , "courseSet_courses"));
+    let title = cookieService("get" , "courseSet_title","",0);
+    let done = cookieService("get" , "courseSet_done","",0);
+    let courses = JSON.parse(cookieService("get" , "courseSet_courses","",0));
 
     useEffect(()=>{
         (async () => {

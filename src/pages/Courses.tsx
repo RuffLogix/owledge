@@ -32,7 +32,7 @@ const Courses:FC = () => {
                             let courseDetails:courseData = {
                                 title : element['title'] ,
                                 done : element['status'] ,
-                                category : JSON.parse(element['tags'].replace(/'\\'/g , '')) ,
+                                category : JSON.parse((element['tags'] as string).replace(/'\\'/g , '')) ,
                                 courses : element['courses']
                             } 
                             

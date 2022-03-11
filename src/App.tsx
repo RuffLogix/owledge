@@ -15,7 +15,7 @@ import cookieService from "./services/cookieService";
 import LoginForm from "./components/LoginForm";
 
 const App: FC = () => {
-  if (!cookieService("get", "isLogin") && window.location.pathname !== "/") {
+  if (!cookieService("get", "isLogin","",0) && window.location.pathname !== "/") {
     document.location.href = "/";
   }
 
@@ -26,10 +26,10 @@ const App: FC = () => {
         <Flex>
           <Box>
             <Heading fontSize={"20px"} pr={3} color={"rgb(235,235,235)"}>
-              Owledge
+              🦉 Owledge
             </Heading>
           </Box>
-          {cookieService("get", "isLogin") ? <MenuBar /> : <LoginForm />}
+          {cookieService("get", "isLogin","",0) ? <MenuBar /> : <LoginForm />}
         </Flex>
       </Container>
 

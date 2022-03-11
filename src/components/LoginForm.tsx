@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import {
     Text,
     Box,
@@ -23,12 +23,12 @@ const LoginForm: FC = () => {
     const [password, setPassword] = useState("");
     const toast = useToast();
 
-    const updateUsername = (e) => {
-        setUsername(e.currentTarget.value);
+    const updateUsername = (event:ChangeEvent<HTMLInputElement>):void => {
+        setUsername(event.currentTarget.value);
     };
 
-    const updatePassword = (e) => {
-        setPassword(e.currentTarget.value);
+    const updatePassword = (event:ChangeEvent<HTMLInputElement>):void => {
+        setPassword(event.currentTarget.value);
     };
 
     async function verify() {
@@ -84,8 +84,8 @@ const LoginForm: FC = () => {
                     <ModalHeader>เข้าสู่ระบบ</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <Input type={"text"} mb={2} onChange={updateUsername} required />
-                        <Input type={"password"} onChange={updatePassword} required />
+                        <Input type={"text"} mb={2} onChange={updateUsername} value={userName} required/>
+                        <Input type={"password"} onChange={updatePassword} value={password} required/>
                     </ModalBody>
 
                     <ModalFooter>

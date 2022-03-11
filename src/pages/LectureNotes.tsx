@@ -32,7 +32,7 @@ const LectureNotes:FC = () => {
                             let example_data:lectureData = {
                                 author : element['author'],
                                 title : element['title'],
-                                category : JSON.parse((element['tags']).replace(/'\\'/g , '')),
+                                category : JSON.parse((element['tags'] as string).replace(/'\\'/g , '')),
                                 download_link : element['lectureLink'],
                                 contact : element['authorLink']
                             }
