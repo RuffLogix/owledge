@@ -1,16 +1,30 @@
-import { Table , Thead , Tbody , Th , Tr , TableCaption} from '@chakra-ui/react';
+import { Table , Thead , Tbody , Th , Tr , TableCaption, useToast} from '@chakra-ui/react';
 import LectureList from '../components/LectureList';
 import { FC, useEffect, useState } from "react";
 import lectureData from '../interfaces/lectureData.interface';
+import routeUrl from '../routeSetting';
 import axios from 'axios';
+import cookieService from '../services/cookieService';
 
 const LectureNotes:FC = () => {
 
     const [data , setData] = useState([]);
+    const toast = useToast();
+
     useEffect(()=>{
         (async () => {
-            const a = await axios.get('https://owledge-backend.herokuapp.com/lectures');
-            setData(a.data);
+            if(cookieService("get", "id", "" , 3)){
+                const a = await axios.get(`${routeUrl}/lectures`);
+                setData(a.data);
+            }else{
+                toast({
+                    title: "แจ้งเตือน",
+                    description: "คุณไม่มีสิทธิ์เข้าถึงคอร์สเรียน",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                });
+            }
         })()
     } , []);
 

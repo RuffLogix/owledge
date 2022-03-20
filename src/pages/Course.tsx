@@ -1,9 +1,10 @@
 import { FC, useEffect, useState } from "react";
-import { Tooltip , Table , Thead , Tbody , Th , Tr , TableCaption , Heading , Flex } from '@chakra-ui/react';
+import { Tooltip , Table , Thead , Tbody , Th , Tr , TableCaption , Heading , Flex, useToast } from '@chakra-ui/react';
 import { CheckCircleIcon, WarningTwoIcon } from "@chakra-ui/icons";
 import ContentList from "../components/ContentList";
 import contentData from "../interfaces/contentData.interface";
 import cookieService from "../services/cookieService";
+import routeUrl from "../routeSetting";
 import axios from "axios";
 
 const Course:FC = () => {
@@ -16,7 +17,7 @@ const Course:FC = () => {
 
     useEffect(()=>{
         (async () => {
-            const a = await axios.get('https://owledge-backend.herokuapp.com/course');
+            const a = await axios.get(`${routeUrl}/course`);
             setData(a.data);
         })()
     } , []);
@@ -46,8 +47,11 @@ const Course:FC = () => {
                     {
                         data.map(element => {
                             let found = false;
-                            for(let i=0 ; i<courses.length && !found ; i++){
-                                if(element['id'] == courses[i]){
+                            console.log(courses);
+                            let tmp = JSON.parse(courses);
+                            for(let i=0 ; i<tmp.length && !found ; i++){
+
+                                if(element['id'] === tmp[i]){
                                     found = true;
                                 }
                             }
@@ -59,8 +63,6 @@ const Course:FC = () => {
                                     course : element['id'] ,
                                     authorLink : element['authorLink'] 
                                 }
-
-                                console.log(CourseData);
 
                                 return (
                                 <ContentList props={CourseData}/>

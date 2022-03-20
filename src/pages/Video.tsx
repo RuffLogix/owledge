@@ -9,15 +9,14 @@ import {
   Td,
   Tbody,
   Skeleton,
-  Text,
   Flex,
   Tooltip,
-  Box,
   Thead,
   Th,
 } from "@chakra-ui/react";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import cookieService from "../services/cookieService";
+import routeUrl from "../routeSetting";
 import axios from "axios";
 
 
@@ -31,7 +30,7 @@ const Video: FC = () => {
 
   useEffect(()=>{
         (async () => {
-            const a = await axios.post('https://owledge-backend.herokuapp.com/video' , {"courseId" : cookieService("get" , "course_id","",0)});
+            const a = await axios.post(`${routeUrl}/video` , {"courseId" : cookieService("get" , "course_id","",0)});
             console.log(a.data);
             setData(JSON.parse(a.data[0]['videos'].replace(/'\\'/g , '')));
             setCourseName(a.data[0]['title']);

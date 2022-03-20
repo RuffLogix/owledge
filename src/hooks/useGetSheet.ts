@@ -5,7 +5,6 @@ const useGetSheet = (gsKey:string , gql:string) => {
  
 	const [loading, setLoading] = useState<boolean>(true);
     const [data, setData] = useState<string[]>([]);
-	// const [data, setData] = useState<question[]>([]);
 
     const createUrl = (key:string , gql:string) => {
         let gq = 'SELECT '+ gql;

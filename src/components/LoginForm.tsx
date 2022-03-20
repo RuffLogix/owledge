@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import cookieService from "../services/cookieService";
+import routeUrl from "../routeSetting";
 
 const LoginForm: FC = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -44,7 +45,7 @@ const LoginForm: FC = () => {
         }
 
         const resData = await axios.post(
-            "https://owledge-backend.herokuapp.com/login",
+            `${routeUrl}/login`,
             { username: userName, password: password }
         );
         const authenData = resData.data;
@@ -59,6 +60,7 @@ const LoginForm: FC = () => {
             });
         } else {
             cookieService("set", "isLogin", "true", 3);
+            cookieService("set", "id", authenData[0].id , 3);
             toast({
                 title: "แจ้งเตือน",
                 description: "เข้าสู่ระบบสำเร็จ",
