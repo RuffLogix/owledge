@@ -13,30 +13,36 @@ import {
   Tooltip,
   Thead,
   Th,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Button,
+  Box,
 } from "@chakra-ui/react";
-import { InfoOutlineIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, InfoOutlineIcon, Search2Icon } from "@chakra-ui/icons";
 import cookieService from "../services/cookieService";
 import routeUrl from "../routeSetting";
 import axios from "axios";
 
-
 const Video: FC = () => {
-
-  const [data , setData] = useState([]);
+  const [data, setData] = useState([]);
   const [videoLink, setVideo] = useState("");
   const [courseName, setCourseName] = useState("");
   const [courseAuthor, setCourseAuthor] = useState("");
   // const [courseClips, setCourseClips] = useState([]);
 
-  useEffect(()=>{
-        (async () => {
-            const a = await axios.post(`${routeUrl}/video` , {"courseId" : cookieService("get" , "course_id","",0)});
-            console.log(a.data);
-            setData(JSON.parse(a.data[0]['videos'].replace(/'\\'/g , '')));
-            setCourseName(a.data[0]['title']);
-            setCourseAuthor(a.data[0]['author']);
-        })()
-    } , []);
+  useEffect(() => {
+    (async () => {
+      const a = await axios.post(`${routeUrl}/video`, {
+        courseId: cookieService("get", "course_id", "", 0),
+      });
+      console.log(a.data);
+      setData(JSON.parse(a.data[0]["videos"].replace(/'\\'/g, "")));
+      setCourseName(a.data[0]["title"]);
+      setCourseAuthor(a.data[0]["author"]);
+    })();
+  }, []);
 
   const updateVideo = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -50,27 +56,56 @@ const Video: FC = () => {
 
   return (
     <div className="video-page">
-      <Flex m={10}>
-        <Heading fontSize={"24px"} fontFamily={"Kanit"} color={"rgb(235,235,235)"}>
+      <Flex m={[5,5,10,10]} align={"center"}>
+        <Heading
+          fontSize={["16px","16px","24px","24px"]}
+          fontFamily={"Kanit"}
+          color={"rgb(235,235,235)"}
+        >
           {courseName}
           <Tooltip label={"ผู้สอน : " + courseAuthor}>
             <InfoOutlineIcon color={"blue.500"} ml={3} />
           </Tooltip>
+          <Menu size={"xs"}> 
+            <MenuButton
+              as={Button}
+              // rightIcon={<ChevronDownIcon />}
+              color={"rgb(32,32,35)"}
+              ml={[3,3,5,5]}
+            >
+              <Search2Icon w={[3,3,4,4]}/>
+            </MenuButton>
+            <MenuList>
+              {data.map((clip) => {
+                video_number += 1;
+                return (
+                  <MenuItem
+                    onClick={updateVideo}
+                    value={"https://www.youtube.com/embed/" + clip["link"]}
+                    color={"rgb(65,65,65)"}
+                    fontSize={"md"}
+                  >
+                    {clip["title"]}
+                  </MenuItem>
+                );
+              })}
+            </MenuList>
+          </Menu>
         </Heading>
       </Flex>
-      <Grid templateColumns={"repeat(4,1fr)"} gap={6} m={5}>
-        <GridItem colSpan={1}>
+      <Grid templateColumns={"repeat(1,1fr)"} gap={6} m={[3,3,10,10]}>
+        {/* <GridItem colSpan={1}>
           <Table>
             <Thead>
               <Tr bg={"rgb(45, 45, 45)"}>
-              <Th color={"rgb(235,235,235)"}>#</Th>
+                <Th color={"rgb(235,235,235)"}>#</Th>
                 <Th color={"rgb(235,235,235)"}>ชื่อคลิป</Th>
               </Tr>
             </Thead>
             <Tbody>
               {data !== [] ? (
                 data.map((clip) => {
-                  video_number+=1;
+                  video_number += 1;
                   return (
                     <Tr bg={"white"}>
                       <Td>{video_number}</Td>
@@ -92,15 +127,21 @@ const Video: FC = () => {
               )}
             </Tbody>
           </Table>
-        </GridItem>
-        <GridItem width={"100%"} colSpan={3}>
-          <AspectRatio ratio={16 / 9}>
+        </GridItem> */}
+        <GridItem width={"100%"}>
+          <AspectRatio ratio={16 / 9} width={"100%"}>
             {videoLink === "" ? (
-              <Heading color={"rgb(235,235,235)"} fontFamily={"Kanit"} fontSize={"xl"}>
+              <Heading
+                color={"rgb(32,32,35)"}
+                fontFamily={"Kanit"}
+                fontSize={"xl"}
+                borderRadius={"md"}
+                bg={"rgb(235,235,235)"}
+              >
                 กรุณาเลือกวิดีโอ
               </Heading>
             ) : (
-              <iframe title="display-video" src={videoLink} allowFullScreen />
+              <iframe title="display-video" src={videoLink} allowFullScreen/>
             )}
           </AspectRatio>
         </GridItem>

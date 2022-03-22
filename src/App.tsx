@@ -1,6 +1,6 @@
 import "./App.css";
 import { FC } from "react";
-import { Text, Flex, Box, Heading, Container } from "@chakra-ui/react";
+import { Text, Flex, Box, Heading, Container, Spacer, background } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Courses from "./pages/Courses";
@@ -23,12 +23,13 @@ const App: FC = () => {
     <div className="App"> 
       <Box bg={"rgb(32,32,35)"}>
       <Container maxW={"container.lg"} pt={3} pb={3}>
-        <Flex>
+        <Flex align={"center"}>
           <Box>
             <Heading fontSize={"20px"} pr={3} color={"rgb(235,235,235)"}>
               🦉 Owledge
             </Heading>
           </Box>
+          <Spacer/>
           {cookieService("get", "isLogin","",0) ? <MenuBar /> : <LoginForm />}
         </Flex>
       </Container>

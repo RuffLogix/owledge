@@ -1,4 +1,5 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { Box, Button, Flex, IconButton, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react";
 import { FC , useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -7,7 +8,8 @@ const MenuBar:FC = () => {
     const [currUrl , setUrl] = useState("");
 
     return (
-        <Flex>
+        <div className={"menubar-component"}>
+        <Flex display={['none','none','flex','flex']}>
             <Box className="btn-box">
                 <Text
                 fontSize={"18px"}
@@ -59,6 +61,71 @@ const MenuBar:FC = () => {
                 </Text>
             </Box>
         </Flex>
+        <Flex display={["flex","flex","none","none"]}>
+            <Menu>
+                <MenuButton 
+                    as={Button} 
+                    bg={"rgb(32,32,35)"}
+                    _expanded={{bg:"rgb(32,32,35)"}}
+                    _hover={{bg:"rgb(32,32,35)"}}
+                >
+                    <HamburgerIcon color={"rgb(235,235,235)"}/>
+                </MenuButton>
+                <MenuList>
+                    <Link to={"/"} onClick={() => {setUrl("")}}>
+                        <MenuItem>
+                            <Text
+                            fontSize={"md"}
+                            color= "rgb(32,32,35)"
+                            >
+                                Home
+                            </Text>
+                        </MenuItem>
+                    </Link>
+                    <Link to={"/courses"} onClick={() => {setUrl("courses")}}>
+                        <MenuItem>
+                            <Text
+                            fontSize={"md"}
+                            color= "rgb(32,32,35)"
+                            >
+                                Courses
+                            </Text>
+                        </MenuItem>
+                    </Link>
+                    <Link to={"/lecturenotes"} onClick={() => {setUrl("lecturenotes")}}>
+                        <MenuItem>
+                            <Text
+                            fontSize={"md"}
+                            color= "rgb(32,32,35)"
+                            >
+                                Lecture Notes
+                            </Text>
+                        </MenuItem>
+                    </Link>
+                    <Link to={"/contest"} onClick={() => {setUrl("contest")}}>
+                        <MenuItem>
+                            <Text
+                            fontSize={"md"}
+                            color= "rgb(32,32,35)"
+                            >
+                                Contest
+                            </Text>
+                        </MenuItem>
+                    </Link>
+                    <Link to={"/about"} onClick={() => {setUrl("about")}}>
+                        <MenuItem>
+                            <Text
+                            fontSize={"md"}
+                            color= "rgb(32,32,35)"
+                            >
+                                About us
+                            </Text>
+                        </MenuItem>
+                    </Link>
+                </MenuList>
+            </Menu>
+        </Flex>
+        </div>
     )
 }
 

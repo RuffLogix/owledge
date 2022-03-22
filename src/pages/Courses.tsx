@@ -30,7 +30,7 @@ const Courses:FC = () => {
 
     return (
         <div className="courses-page">
-            <Table variant={"simple"}>
+            <Table variant={"simple"} rounded={"3xl"}>
                 <TableCaption fontFamily={"Kanit"}>Courses Table</TableCaption>
                 <Thead bg={"rgb(45, 45, 45)"}>
                     <Tr>
